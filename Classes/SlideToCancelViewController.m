@@ -157,6 +157,7 @@ static const int animationFramesPerSec = 8;
 		if (slider.value != 1.0)  //if the value is not the max, slide this bad boy back to zero
 		{
 			[slider setValue: 0 animated: YES];
+			label.alpha = 1.0;
 			[self startTimer];
 		}
 		else {
