@@ -82,7 +82,6 @@ static const int animationFramesPerSec = 8;
 	slider.maximumValue = 1.0;
 	slider.continuous = YES;
 	slider.value = 0.0;
-	[view addSubview:slider];
 	
 	// Set the slider action methods
 	[slider addTarget:self 
@@ -114,6 +113,8 @@ static const int animationFramesPerSec = 8;
 	label.font = labelFont;
 	label.text = labelText;
 	[view addSubview:label];
+	
+	[view addSubview:slider];
 
 	// This property is set to NO (disabled) on creation.
 	// The caller must set it to YES to animate the slider.
