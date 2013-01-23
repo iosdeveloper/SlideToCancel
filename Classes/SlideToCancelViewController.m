@@ -93,6 +93,13 @@ static const int animationFramesPerSec = 8;
 	[slider addTarget:self 
 			   action:@selector(sliderChanged:) 
 	 forControlEvents:UIControlEventValueChanged];
+    
+    //Adding a target for when you release outisde of the "view"
+    //This way, if they slide past the end or off the axis, we'll still get the expected result
+    //And it'll slide back!
+    [slider addTarget:self
+               action:@selector(sliderUp:)
+     forControlEvents:UIControlEventTouchUpOutside];
 
 	// Create the label with the actual size required by the text
 	// If you change the text, font, or font size by using the "label" property,
@@ -177,9 +184,12 @@ static const int animationFramesPerSec = 8;
 {
 	// Fade the text as the slider moves to the right. This code makes the
 	// text totally dissapear when the slider is 35% of the way to the right.
-	label.alpha = MAX(0.0, 1.0 - (slider.value * 3.5));
-	
-	// Stop the animation if the slider moved off the zero point
+    
+    //This is incorrect, and I wanted it to stay visible slightly longer
+	//label.alpha = MAX(0.0, 1.0 - (slider.value * 3.5));
+    label.alpha= MAX(0.0, 1.0 - (slider.value / 0.65));
+    
+    // Stop the animation if the slider moved off the zero point
 	if (slider.value != 0) {
 		[self stopTimer];
 		[label.layer setNeedsDisplay];
